@@ -5,7 +5,6 @@
 
 #define MAX_LINE_LENGTH 1024
 #define DELIMITER "   "
-#define VARIANT_B
 
 int count_lines_in_file(const char *filename) {
     FILE *file = fopen(filename, "r");
