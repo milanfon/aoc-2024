@@ -20,6 +20,9 @@ void process_line_callback(const char *line, void *context) {
     token = strtok(NULL, DELIMITER);
     int next_num = atoi(token);
 
+    if (abs(num - next_num) > 3)
+        return;
+
     if (next_num > num)
         increasing = true;
     else if (next_num < num)
@@ -39,7 +42,7 @@ void process_line_callback(const char *line, void *context) {
         } else
             return;
     }
-    //printf("Success: %s\n", line_copy);
+    printf("Success: %s\n", line_copy);
     ctx->acc++;
 }
 
