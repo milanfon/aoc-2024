@@ -11,8 +11,6 @@ typedef struct {
 } LineProcessingContext;
 
 void process_line_callback(const char *line, void *context) {
-    char line_copy[1024];
-    strncpy(line_copy, line, 1024 - 1);
     LineProcessingContext *ctx = (LineProcessingContext *)context;
     char *token = strtok((char *)line, DELIMITER);
     int num = atoi(token);
@@ -42,7 +40,6 @@ void process_line_callback(const char *line, void *context) {
         } else
             return;
     }
-    printf("Success: %s\n", line_copy);
     ctx->acc++;
 }
 
