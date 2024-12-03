@@ -35,17 +35,66 @@ const char *is_mul(const char *c, unsigned int *res) {
     return c;
 }
 
+const char *is_do(const char *c) {
+    if (*c++ != 'd')
+        return NULL;
+    if (*c++ != 'o')
+        return NULL;
+    if (*c++ != '(')
+        return NULL;
+    if (*c++ != ')')
+        return NULL;
+    return c;
+}
+
+const char *is_dont(const char *c) {
+    if (*c++ != 'd')
+        return NULL;
+    if (*c++ != 'o')
+        return NULL;
+    if (*c++ != 'n')
+        return NULL;
+    if (*c++ != '\'')
+        return NULL;
+    if (*c++ != 't')
+        return NULL;
+    if (*c++ != '(')
+        return NULL;
+    if (*c++ != ')')
+        return NULL;
+    return c;
+}
+
 void process_line_callback(const char *line, void *context){
     const char *c = line;
     LineProcessingContext *ctx = (LineProcessingContext *)context;
 
     while (*c != '\0') {
-        unsigned int is_mul_res = 0;
-        const char *next = is_mul(c, &is_mul_res);
-        if (next) {
-            ctx->acc += is_mul_res;
-            c = next;
-        } else
+        const char next;
+        if (*c == 'd') {
+            const char *next_do = is_do(c);
+            if (next_do) {
+                ctx->do_flag = true;
+                c = next_do;
+                continue;
+            }
+            const char *next_dont = is_dont(c);
+            if (next_dont) {
+                ctx->do_flag = false;
+                c = next_dont;
+                continue;
+            }
+        }
+
+        if (ctx->do_flag) {
+            unsigned int is_mul_res = 0;
+            const char *next = is_mul(c, &is_mul_res);
+            if (next) {
+                ctx->acc += is_mul_res;
+                c = next;
+            } else
+                c++;
+        } else 
             c++;
     }
 }
