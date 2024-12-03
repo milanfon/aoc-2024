@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_LINE_LENGTH 1024
+#define MAX_LINE_LENGTH 4096
 
 int count_lines_in_file(const char *filename) {
     FILE *file = fopen(filename, "r");

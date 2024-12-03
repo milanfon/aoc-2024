@@ -34,7 +34,6 @@ void process_line_callback(const char *line, void *context){
         }
         if (*c++ != ')')
             continue;
-        //printf("\n\nMUL(%d,%d)\n", num_a, num_b);
         ctx->acc += num_a * num_b;
     }
 }
