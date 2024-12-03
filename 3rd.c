@@ -8,60 +8,43 @@ typedef struct {
 } LineProcessingContext;
 
 const char *is_mul(const char *c, unsigned int *res) {
-    if (*c++ != 'm')
-        return NULL;
-    if (*c++ != 'u')
-        return NULL;
-    if (*c++ != 'l')
-        return NULL;
-    if (*c++ != '(')
-        return NULL;
+    if (*c++ != 'm') return NULL;
+    if (*c++ != 'u') return NULL;
+    if (*c++ != 'l') return NULL;
+    if (*c++ != '(') return NULL;
     int num_a = 0, num_b = 0;
     while (*c >= '0' && *c <= '9') {
         num_a = num_a * 10;
         num_a += *c - '0';
         c++;
     }
-    if (*c++ != ',')
-        return NULL;
+    if (*c++ != ',') return NULL;
     while (*c >= '0' && *c <= '9') {
         num_b = num_b * 10;
         num_b += *c - '0';
         c++;
     }
-    if (*c++ != ')')
-        return NULL;
+    if (*c++ != ')') return NULL;
     *res = num_a * num_b;
     return c;
 }
 
 const char *is_do(const char *c) {
-    if (*c++ != 'd')
-        return NULL;
-    if (*c++ != 'o')
-        return NULL;
-    if (*c++ != '(')
-        return NULL;
-    if (*c++ != ')')
-        return NULL;
+    if (*c++ != 'd') return NULL;
+    if (*c++ != 'o') return NULL;
+    if (*c++ != '(') return NULL;
+    if (*c++ != ')') return NULL;
     return c;
 }
 
 const char *is_dont(const char *c) {
-    if (*c++ != 'd')
-        return NULL;
-    if (*c++ != 'o')
-        return NULL;
-    if (*c++ != 'n')
-        return NULL;
-    if (*c++ != '\'')
-        return NULL;
-    if (*c++ != 't')
-        return NULL;
-    if (*c++ != '(')
-        return NULL;
-    if (*c++ != ')')
-        return NULL;
+    if (*c++ != 'd')  return NULL;
+    if (*c++ != 'o')  return NULL;
+    if (*c++ != 'n')  return NULL;
+    if (*c++ != '\'') return NULL;
+    if (*c++ != 't')  return NULL;
+    if (*c++ != '(')  return NULL;
+    if (*c++ != ')')  return NULL;
     return c;
 }
 
